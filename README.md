@@ -1,0 +1,2 @@
+# codeGenerater
+a  ssh2/springmvc  codeGenerater written by bruce .(me hahaha. very haoyong )
