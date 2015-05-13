@@ -1,0 +1,10 @@
+package com.${domain}.dao;
+
+import java.io.Serializable;
+
+
+import com.${domain}.model.${modelName};
+
+public interface ${modelName}Dao extends HibernateDao<${modelName}, Serializable> {
+	
+}

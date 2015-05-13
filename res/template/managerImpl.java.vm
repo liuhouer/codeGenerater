@@ -1,0 +1,78 @@
+#set ($bean = $modelName) 
+#set ($beanlen = $bean.length())
+#set ($Bean = $bean.substring(0,1).toUpperCase()+$bean.substring(1,$beanlen)) 
+
+package com.${domain}.manager.impl;
+
+import java.io.Serializable;
+import java.util.List;
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+import com.${domain}.model.$Bean;
+import com.${domain}.manager.${Bean}Manager;
+import com.${domain}.dao.${Bean}Dao;
+
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.${domain}.utils.MyConstant;
+import com.${domain}.utils.PageView;
+import com.${domain}.utils.QueryResult;
+
+@Service("${bean}Manager")
+public class ${Bean}ManagerImpl implements ${Bean}Manager {
+
+    @Autowired
+	private ${Bean}Dao ${bean.toLowerCase()}Dao;
+
+	@Override
+	public ${Bean} find${Bean}(String id) {
+		return ${bean.toLowerCase()}Dao.find(id);
+	}
+
+	@Override
+	public List<${Bean}> findAll() {
+		return ${bean.toLowerCase()}Dao.findAll();
+	}
+
+	@Override
+	public void add${Bean}(${Bean} ${bean.toLowerCase()}) {
+		${bean.toLowerCase()}Dao.save(${bean.toLowerCase()});
+	}
+
+	@Override
+	public boolean del${Bean}(String id) {
+		${Bean} ${bean.toLowerCase()} = ${bean.toLowerCase()}Dao.find(id);
+		${bean.toLowerCase()}Dao.delete(${bean.toLowerCase()});
+		return true;
+	}
+
+	@Override
+	public boolean update${Bean}(${Bean} ${bean.toLowerCase()}) {
+		${bean.toLowerCase()}Dao.update(${bean.toLowerCase()});
+		return true;
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override
+	public QueryResult<${Bean}> findByCondition(PageView<${Bean}> p,
+			String wheresql, LinkedHashMap<String, String> order) {
+		QueryResult qrs = ${bean.toLowerCase()}Dao.findByCondition(p.getStartindex(),
+				MyConstant.MAXRESULT, wheresql, order);
+		return qrs;
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override
+	public QueryResult<${Bean}> findByCondition(String wheresql) {
+		// TODO Auto-generated method stub
+		QueryResult qrs = ${bean.toLowerCase()}Dao.findByCondition(
+				 wheresql);
+		return qrs;
+	}
+}
+

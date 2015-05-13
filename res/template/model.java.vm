@@ -1,0 +1,60 @@
+package com.${domain}.model;
+
+import java.io.Serializable;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Table(name = "${tableName}")
+public class ${modelName} implements Serializable{
+
+#foreach($Property in $PropertyList)
+#if( ${Property.length} == 0 )		## 判断数据库字段类型字符串是否包含长度
+#if(${Property.Name.equalsIgnoreCase("id")})
+	@Id
+	@GeneratedValue(generator = "system-uuid")
+	@GenericGenerator(name = "system-uuid", strategy = "uuid")                                                                        
+	private ${Property.Type} ${Property.Column};
+#else
+	
+	private ${Property.Type} ${Property.Column};
+#end
+#else		
+#if( ${Property.Name.equalsIgnoreCase("id")} )
+	@Id
+	@GeneratedValue(generator = "system-uuid")
+	@GenericGenerator(name = "system-uuid", strategy = "uuid")
+	@Column(length = $Property.length)	
+	private ${Property.Type} ${Property.Column};
+#else
+	@Column(length = $Property.length)
+	private ${Property.Type} ${Property.Column};
+#end  
+#end  
+
+#end 
+
+#foreach($Property in $PropertyList)
+	#set ($namelen = ${Property.Name.length()}) 
+	public ${Property.Type} get${Property.Name.substring(0,1).toUpperCase()}${Property.Name.substring(1,$namelen)}() {
+		return ${Property.Column};	
+	}
+	
+	public void set${Property.Name.substring(0,1).toUpperCase()}${Property.Name.substring(1,$namelen)}(${Property.Type} ${Property.Column}) {
+		this.${Property.Column} = ${Property.Column};
+	}
+#end
+
+    @Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
+	}
+}
