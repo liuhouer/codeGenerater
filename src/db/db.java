@@ -20,8 +20,8 @@ public class db {
 	public static Statement stat = null;
 
 	public static void init() {
-//		getCon("mysql", "60.194.51.7", 3306, "root", "root");
-		getBruceConn();
+		getCon("mysql", "60.194.51.7", 3306, "root", "Yunluqwe");
+//		getBruceConn();
 	}
 	
 	public static void initBruce() {
@@ -29,9 +29,9 @@ public class db {
 		getBruceConn();
 	}
 	
-	public static void initDUDU() {
+	public static void initLocal() {
 //		getCon("mysql", "192.168.0.120", 3306, "root", "Yunluqwe");
-		getDUDUConn();
+		getLocalConn();
 	}
 
 	public static void init(String type, String dataSource, Integer port,
@@ -94,13 +94,13 @@ public class db {
 	private static void getBruceConn() {
 		// 驱动程序名
 		String driver = "com.mysql.jdbc.Driver";
-		String url = "jdbc:mysql://localhost:3306/test1";
+		String url = "jdbc:mysql://123.56.129.117:3306/buci";
 		System.out.println(url + "-------url");
 		try {
 			// 加载驱动程序
 			Class.forName(driver);
 			// 连续数据库
-			con = DriverManager.getConnection(url, "root", "root");
+			con = DriverManager.getConnection(url, "robot", "lonelyrobot");
 			if (!con.isClosed())
 				System.out.println("Succeeded connecting to the Database!");
 			// statement用来执行SQL语句
@@ -113,16 +113,16 @@ public class db {
 
 	}
 	
-	private static void getDUDUConn() {
+	private static void getLocalConn() {
 		// 驱动程序名
 		String driver = "com.mysql.jdbc.Driver";
-		String url = "jdbc:mysql://123.56.129.117:3306/buci";
+		String url = "jdbc:mysql://localhost:3306/test";
 		System.out.println(url + "-------url");
 		try {
 			// 加载驱动程序
 			Class.forName(driver);
 			// 连续数据库
-			con = DriverManager.getConnection(url, "robot", "lonelyrobot");
+			con = DriverManager.getConnection(url, "root", "root");
 			if (!con.isClosed())
 				System.out.println("Succeeded connecting to the Database!");
 			// statement用来执行SQL语句

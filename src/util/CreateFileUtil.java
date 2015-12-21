@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 public class CreateFileUtil {
 
@@ -152,25 +153,44 @@ public static String createTempFile(String prefix, String suffix, String dirName
 	   pathMap = new HashMap<Integer, String>();
 	  }
 	  File file = new File(filepath);
-	  // 文件
-	  if (!file.isDirectory()) {
-	   pathMap.put(pathMap.size(), file.getPath());
+	  Properties prop = System.getProperties();
+	  String os = prop.getProperty("os.name");
+        if(os.startsWith("win") || os.startsWith("Win") ){// windows操作系统
+        	 // 文件
+      	  if (!file.isDirectory()) {
+      	   pathMap.put(pathMap.size(), file.getPath());
 
-	  } else if (file.isDirectory()) { // 如果是目录， 遍历所有子目录取出所有文件名
-		   String[] filelist = file.list();
-		   for (int i = 0; i < filelist.length; i++) {
-			    if(!filelist[i].endsWith(".java.vm")){
-			    	continue;
-			    }
-			    File readfile = new File(filepath + "/" + filelist[i]);
-			    if (!readfile.isDirectory()) {
-			    	pathMap.put(pathMap.size(), readfile.getPath());
-		
-			    } else if (readfile.isDirectory()) { // 子目录的目录
-			    	readfile(filepath + "/" + filelist[i], pathMap);
-			    }
-		   }
-	  }
+      	  } else if (file.isDirectory()) { // 如果是目录， 遍历所有子目录取出所有文件名
+      		   String[] filelist = file.list();
+      		   for (int i = 0; i < filelist.length; i++) {
+      			    if(!filelist[i].endsWith(".java.vm")){
+      			    	continue;
+      			    }
+      			    File readfile = new File(filepath + "/" + filelist[i]);
+      			    if (!readfile.isDirectory()) {
+      			    	pathMap.put(pathMap.size(), readfile.getPath());
+      		
+      			    } else if (readfile.isDirectory()) { // 子目录的目录
+      			    	readfile(filepath + "/" + filelist[i], pathMap);
+      			    }
+      		   }
+      	  }
+        }else{//linux || OS X
+        	String[] filelist = file.list();
+   		   for (int i = 0; i < filelist.length; i++) {
+   			    if(!filelist[i].endsWith(".java.vm")){
+   			    	continue;
+   			    }
+   			    File readfile = new File(filepath + "/" + filelist[i]);
+   			    if (!readfile.isDirectory()) {
+   			    	pathMap.put(pathMap.size(), readfile.getPath());
+   		
+   			    } else if (readfile.isDirectory()) { // 子目录的目录
+   			    	readfile(filepath + "/" + filelist[i], pathMap);
+   			    }
+   		   }
+        }
+	 
 	  return pathMap;
 	 }
 

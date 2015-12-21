@@ -57,4 +57,30 @@ public class ${modelName} implements Serializable{
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
 	}
+	
+	/*这里是mybatis部分代码
+	
+	#foreach($Property in $PropertyList)${Property.Column},#end
+	
+
+	#foreach($Property in $PropertyList)
+	#{${Property.Column}},#end
+	
+	<update id="updateModel" parameterType="com.mai.app.entity.${modelName}">
+        update ${modelName}
+        <set>
+        #foreach($Property in $PropertyList)
+        
+	   	 ${Property.Column} = #{${Property.Column}},
+	   	 
+	    #end
+        </set>
+        <where>
+         id = #{id}
+        </where>
+    </update>
+	
+	
+	
+	*/
 }

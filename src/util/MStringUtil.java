@@ -1,5 +1,7 @@
 package util;
 
+import java.util.Properties;
+
 import org.apache.commons.lang.StringUtils;
 
 public class MStringUtil {
@@ -18,6 +20,19 @@ public class MStringUtil {
 		return pre + upperCase + remnand;
 	}
 	
-	
+	/**
+	 * 返回操作系统名
+	 */
+	public static String getOsName() {
+		Properties prop = System.getProperties();
+		String os = prop.getProperty("os.name");
+		    if(os.startsWith("win") || os.startsWith("Win") ){// windows操作系统
+		    	os = "win";
+		    }else{
+		    	os = "other";
+		    }
+		    
+		    return os;
+	}
 	
 }

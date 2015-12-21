@@ -54,19 +54,21 @@ public class generateThing {
 			System.out.println("url is null");
 		}else{
 			String filepath = url.getPath();
+		
+	        	 if(filepath.startsWith("file:")){   
+	                 if(filepath.length()>5){   
+	              	   filepath = filepath.substring(5);   
+	                 }   
+	                 filepath = filepath.split("!")[0];   
+	                 File file = new File(filepath);   
+//	                 System.out.println(file.getParent());   
+	                 filepath = file.getParent() + "\\template";
+	                
+	  			}else{
+	  				System.out.println("is not jar file");
+	  			}
 //			System.out.println(filepath);
-			if(filepath.startsWith("file:")){   
-               if(filepath.length()>5){   
-            	   filepath = filepath.substring(5);   
-               }   
-               filepath = filepath.split("!")[0];   
-               File file = new File(filepath);   
-//               System.out.println(file.getParent());   
-               filepath = file.getParent() + "\\template";
-              
-			}else{
-				System.out.println("is not jar file");
-			}
+			
 			writeOneModelFile(filepath,outpath,tableName);
 			
 		}
@@ -161,7 +163,13 @@ private static void writeOneModelFile(String templatepath , String filepath , St
 			for(int i=0 ; i < map.size(); i++) {
 				String template = map.get(i);
 				System.out.println(template);
-				String name = template.substring(map.get(i).lastIndexOf("\\")+1);
+				String name = "";
+				 File file = new File(filepath);
+				 if(MStringUtil.getOsName().equals("win")){
+				     name = template.substring(map.get(i).lastIndexOf("\\")+1);
+				 }else{
+					 name = template.substring(map.get(i).lastIndexOf("/")+1);
+				 }
 				String templateName = name.substring(0,name.indexOf("."));
 				//创建文件夹
 				
@@ -204,7 +212,6 @@ private static void writeOneModelFile(String templatepath , String filepath , St
 					if(templateName.equals("model")){
 						fileName = this_folder  +"/"+ table.getModelName() + ".java";
 					}
-					
 //					else if(templateName.equals("queryImpl")){
 //						System.out.println("this......................"+this_folder);
 //						fileName = this_folder  +"/"+ table.getModelName() + ".java";
@@ -224,6 +231,7 @@ private static void writeOneModelFile(String templatepath , String filepath , St
 			System.out.println("Write file error!");
 		}
 	}
+
 	
 	public static String loadTemplate(String templatePath , Table table , String templateName){
 		String result = "";
