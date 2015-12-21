@@ -79,6 +79,18 @@ public class ${modelName} implements Serializable{
          id = #{id}
         </where>
     </update>
+    
+    
+    
+    <select id="findAllByPage"  
+            resultType="com.mai.X.entity.${modelName}">
+        select * from modelName
+    </select>
+    
+    <select id="findByID"  parameterType="string"
+            resultType="com.mai.X.entity.${modelName}">
+        select * from ${modelName} where ${modelName}ID = #{id}
+    </select>
 	
 	
 	
