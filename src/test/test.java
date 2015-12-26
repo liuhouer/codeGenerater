@@ -12,7 +12,7 @@ public class test {
 //     	generateThing.generateAll("yunlu_v2","D://opt//dir111");
 		
 		
-		generateThing.generateOneModle("bc_reset", "//Users//zhangyang//Documents//opt//dir666");
+		generateThing.generateOneModle("cardframe", "//Users//zhangyang//Documents//opt//dir666");
 	}
 	
 	
