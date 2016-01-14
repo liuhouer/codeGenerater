@@ -7,12 +7,12 @@ public class test {
 	
 	
 	public static void main(String[] args) throws Exception{
-		db.initLocal();
+		db.initBruce();
 	    //	ConnectServer.init();
 //     	generateThing.generateAll("yunlu_v2","D://opt//dir111");
 		
 		
-		generateThing.generateOneModle("cardframe", "//Users//zhangyang//Documents//opt//dir666");
+		generateThing.generateOneModle("bc_movies", "//Users//zhangyang//Documents//opt//dir666");
 	}
 	
 	
