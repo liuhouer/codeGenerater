@@ -30,7 +30,7 @@ public class ${Bean}ManagerImpl implements ${Bean}Manager {
 	private ${Bean}Dao ${bean.toLowerCase()}Dao;
 
 	@Override
-	public ${Bean} find${Bean}(String id) {
+	public ${Bean} find${Bean}(Integer id) {
 		return ${bean.toLowerCase()}Dao.find(id);
 	}
 
@@ -45,7 +45,7 @@ public class ${Bean}ManagerImpl implements ${Bean}Manager {
 	}
 
 	@Override
-	public boolean del${Bean}(String id) {
+	public boolean del${Bean}(Integer id) {
 		${Bean} ${bean.toLowerCase()} = ${bean.toLowerCase()}Dao.find(id);
 		${bean.toLowerCase()}Dao.delete(${bean.toLowerCase()});
 		return true;
@@ -73,6 +73,24 @@ public class ${Bean}ManagerImpl implements ${Bean}Manager {
 		QueryResult qrs = ${bean.toLowerCase()}Dao.findByCondition(
 				 wheresql);
 		return qrs;
+	}
+	
+	@Override
+	public List<${Bean}> querySql(String sql, Object... obj) {
+		// TODO Auto-generated method stub
+		return ${bean.toLowerCase()}.querySql(sql, ${Bean}.class, obj);
+	}
+
+	@Override
+	public List<${Bean}> querySql(String sql) {
+		// TODO Auto-generated method stub
+		return ${bean.toLowerCase()}.querySql(sql, ${Bean}.class);
+	}
+
+	@Override
+	public PageView<List<Map<String, Object>>> querySqlMap(String sql,PageView<List<Map<String,Object>>> pageView) {
+		// TODO Auto-generated method stub
+		return ${bean.toLowerCase()}.QuerySQLForMapList(sql, pageView);
 	}
 }
 

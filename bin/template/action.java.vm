@@ -49,11 +49,11 @@ public class ${Bean}Action {
 	}
 	
 	@RequestMapping("/toEdit")
-	public String toEdit(HttpServletRequest request, @RequestParam("id") String id,ModelMap map) {
+	public String toEdit(HttpServletRequest request, @RequestParam("id") Integer id,ModelMap map) {
 		//String id = request.getParameter("id");
 		//List<${Bean}> Pidlist = ${Bean.toLowerCase()}Manager.findAll();
 		//map.addAttribute("Pidlist",Pidlist);
-		if(!StringUtils.isEmpty(id)){
+		if(null!=id && 0!=id){
 			${Bean} model = ${Bean.toLowerCase()}Manager.find${Bean}(id);
 			map.put("model", model);
 		}
@@ -61,7 +61,7 @@ public class ${Bean}Action {
 	}
 	
 	@RequestMapping("/remove")
-	public String remove(@RequestParam("id") String id) {
+	public String remove(@RequestParam("id") Integer id) {
 		this.${Bean.toLowerCase()}Manager.del${Bean}(id);
 		return LIST_ACTION;
 	}
@@ -89,20 +89,20 @@ public class ${Bean}Action {
 	}
 
 	@RequestMapping("/find${Bean}")
-	private String find${Bean}(@RequestParam("id") String id, ModelMap map) {
+	private String find${Bean}(@RequestParam("id") Integer id, ModelMap map) {
 		${Bean} ${bean.toLowerCase()} = this.${bean.toLowerCase()}Manager.find${Bean}(id);
 		map.addAttribute("${bean.toLowerCase()}", ${bean.toLowerCase()});
 		return "findresult";
 	}
 
 	@RequestMapping("/del${Bean}")
-	public String del${Bean}(@RequestParam("id") String id) {
+	public String del${Bean}(@RequestParam("id") Integer id) {
 		this.${bean.toLowerCase()}Manager.del${Bean}(id);
 		return LIST_ACTION;
 	}
 
 	@RequestMapping("/update${Bean}")
-	public String update${Bean}(@RequestParam("id") String id) {
+	public String update${Bean}(@RequestParam("id") Integer id) {
 		${Bean} ${bean.toLowerCase()} = this.${bean.toLowerCase()}Manager.find${Bean}(id);
 		this.${bean.toLowerCase()}Manager.update${Bean}(${bean.toLowerCase()});
 		return LIST_ACTION;

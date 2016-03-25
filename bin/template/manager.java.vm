@@ -11,13 +11,13 @@ import com.${domain}.utils.QueryResult;
 
 public interface ${Bean}Manager {
 	
-	public $Bean find$Bean(String id);
+	public $Bean find$Bean(Integer id);
 
 	public List<$Bean> findAll();
 
 	public void add${Bean}($Bean $bean.toLowerCase());
 
-	public boolean del${Bean}(String id);
+	public boolean del${Bean}(Integer id);
 
 	public boolean update${Bean}($Bean $bean.toLowerCase());
 	
@@ -26,6 +26,26 @@ public interface ${Bean}Manager {
 
 	public QueryResult<${Bean}> findByCondition(
 			String wheresql);
+			
+	/**
+	 * sql+
+	 * @return
+	 */
+	public List<${Bean}> querySql(String sql,Object... obj);
+	
+	/**
+	 * sql
+	 * @return
+	 */
+	public List<${Bean}> querySql(String sql);
+	
+	
+	/**
+	 * sqlmap
+	 * @return
+	 */
+	public PageView<List<Map<String, Object>>> querySqlMap(String sql,PageView<List<Map<String,Object>>> pageView);
+
 	
 }
 
