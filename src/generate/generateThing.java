@@ -25,6 +25,9 @@ public class generateThing {
 	public static void generateAll(String dataBaseName,String outpath) throws Exception{
 		List<String> tableName = db.getTable(dataBaseName);
 		List<Table> list = db.getColumn(tableName);
+//		for (Table t:list) {
+//			System.out.println(t.getTableName());
+//		}
 		URL url = Thread.currentThread().getClass().getResource("/template");
 		if(url==null){
 			System.out.println("url is null");

@@ -9,10 +9,10 @@ public class test {
 	public static void main(String[] args) throws Exception{
 		db.initBruce();
 	    //	ConnectServer.init();
-//     	generateThing.generateAll("yunlu_v2","D://opt//dir111");
+//     	generateThing.generateAll("buci","D://opt//dir111");
 		
 		
-		generateThing.generateOneModle("bc_lrcid_link", "//Users//zhangyang//Documents//opt//dir555");
+		generateThing.generateOneModle("in_getnotes", "//Users//zhangyang//Documents//opt//dir555");
 	}
 	
 	
