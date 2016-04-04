@@ -6,6 +6,7 @@ package com.${domain}.manager.impl;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -78,19 +79,19 @@ public class ${Bean}ManagerImpl implements ${Bean}Manager {
 	@Override
 	public List<${Bean}> querySql(String sql, Object... obj) {
 		// TODO Auto-generated method stub
-		return ${bean.toLowerCase()}.querySql(sql, ${Bean}.class, obj);
+		return ${bean.toLowerCase()}Dao.querySql(sql, ${Bean}.class, obj);
 	}
 
 	@Override
 	public List<${Bean}> querySql(String sql) {
 		// TODO Auto-generated method stub
-		return ${bean.toLowerCase()}.querySql(sql, ${Bean}.class);
+		return ${bean.toLowerCase()}Dao.querySql(sql, ${Bean}.class);
 	}
 
 	@Override
 	public PageView<List<Map<String, Object>>> querySqlMap(String sql,PageView<List<Map<String,Object>>> pageView) {
 		// TODO Auto-generated method stub
-		return ${bean.toLowerCase()}.QuerySQLForMapList(sql, pageView);
+		return ${bean.toLowerCase()}Dao.QuerySQLForMapList(sql, pageView);
 	}
 }
 

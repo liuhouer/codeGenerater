@@ -12,7 +12,7 @@ public class test {
 //     	generateThing.generateAll("buci","D://opt//dir111");
 		
 		
-		generateThing.generateOneModle("in_getnotes", "//Users//zhangyang//Documents//opt//dir555");
+		generateThing.generateOneModle("in_quan", "//Users//zhangyang//Documents//opt//dir666");
 	}
 	
 	

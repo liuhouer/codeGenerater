@@ -16,15 +16,21 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "${tableName}")
 public class ${modelName} implements Serializable{
 
+/**
+ *
+ * serialVersionUID
+ */
+private static final long serialVersionUID = 1L;
+
 #foreach($Property in $PropertyList)
 #if( ${Property.length} == 0 )		## 判断数据库字段类型字符串是否包含长度
 #if(${Property.Name.equalsIgnoreCase("id")})
-  //注释掉的uuid模板
-	//@Id
-	//@GeneratedValue(generator = "system-uuid")
-	//@GenericGenerator(name = "system-uuid", strategy = "uuid")  
+  /* 注释掉的uuid模板
+	@Id
+	@GeneratedValue(generator = "system-uuid")
+	@GenericGenerator(name = "system-uuid", strategy = "uuid")  */
 	
-	//下面是自增的native ID方式
+	/* 下面是自增的native ID方式 */
 	@Id
 	@GeneratedValue(generator = "paymentableGenerator") 
 	@GenericGenerator(name = "paymentableGenerator", strategy = "native")                                                                      
@@ -35,10 +41,15 @@ public class ${modelName} implements Serializable{
 #end
 #else		
 #if( ${Property.Name.equalsIgnoreCase("id")} )
+	 /* 注释掉的uuid模板
 	@Id
 	@GeneratedValue(generator = "system-uuid")
-	@GenericGenerator(name = "system-uuid", strategy = "uuid")
-	@Column(length = $Property.length)	
+	@GenericGenerator(name = "system-uuid", strategy = "uuid")  */
+	
+	/* 下面是自增的native ID方式 */
+	@Id
+	@GeneratedValue(generator = "paymentableGenerator") 
+	@GenericGenerator(name = "paymentableGenerator", strategy = "native") 
 	private ${Property.Type} ${Property.Column};
 #else
 	@Column(length = $Property.length)

@@ -4,6 +4,7 @@
 
 package com.${domain}.manager;
 import java.util.List;
+import java.util.Map;
 import com.${domain}.model.${modelName};
 import java.util.LinkedHashMap;
 import com.${domain}.utils.PageView;
