@@ -10,6 +10,13 @@ import org.springframework.stereotype.Service;
 
 import com.${domain}.model.$Bean;
 import com.${domain}.dao.${Bean}Dao;
+/**
+ * @author bruce
+ * @date ${date}
+ * @email zhangyang226@gmial.com
+ * @site http://blog.northpark.cn | http://northpark.cn | orginazation https://github.com/jellyband
+ * 
+ */
 
 @Service("${bean}Dao")
 public class ${Bean}DaoImpl extends HibernateDaoImpl<$Bean, Serializable> implements ${Bean}Dao {

@@ -3,10 +3,6 @@
 #set ($Bean = $bean.substring(0,1).toUpperCase()+$bean.substring(1,$beanlen)) 
 
 package com.${domain}.action;
-/*
-*@author bruce
-*
-**/
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang.StringUtils;
@@ -29,6 +25,14 @@ import java.util.LinkedHashMap;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
+/**
+ * @author bruce
+ * @date ${date}
+ * @email zhangyang226@gmial.com
+ * @site http://blog.northpark.cn | http://northpark.cn | orginazation https://github.com/jellyband
+ * 
+ */
 @Controller
 @RequestMapping("/${bean.toLowerCase()}Action")
 @SessionAttributes({ "list", "${bean.toLowerCase()}" })
@@ -70,7 +74,7 @@ public class ${Bean}Action {
 	public String removes(@RequestParam("ids") String ids) {
 		String[] str = ids.split(",");
 		for(String s :str){
-			this.${Bean.toLowerCase()}Manager.del${Bean}(s);
+			this.${Bean.toLowerCase()}Manager.del${Bean}(Integer.parseInt(s));
 		}
 		return LIST_ACTION;
 	}
@@ -113,7 +117,7 @@ public class ${Bean}Action {
 			HttpServletResponse response, HttpSession session) {
 		String whereSql = ${Bean.toLowerCase()}Query.getSql(condition);
 		
-		PageView<${Bean}> pageView = getPageView(request, whereSql);
+		PageView<${Bean}> pageView = getPageView(null, whereSql);
 		
 
 		LinkedHashMap<String, String> order = new LinkedHashMap<String, String>();
@@ -130,12 +134,12 @@ public class ${Bean}Action {
 		return "admin/${Bean.toLowerCase()}/${Bean.toLowerCase()}List";
 	}
 
-	private PageView<${Bean}> getPageView(HttpServletRequest request,
+	private PageView<${Bean}> getPageView(String page,
 			String whereSql) {
 		PageView<${Bean}> pageView = new PageView<${Bean}>();
 		int currentpage = 0; //当前页码
 		int pages = 0; //总页数
-		int n = this.${Bean.toLowerCase()}Manager.findByCondition(whereSql).getResultlist().size();
+		int n = this.${Bean.toLowerCase()}Manager.countHql(new ${Bean}(), whereSql);;
 		int maxresult = MyConstant.MAXRESULT; /** 每页显示记录数**/
         if(n % maxresult==0)
        {
@@ -143,10 +147,10 @@ public class ${Bean}Action {
        }else{
           pages = n / maxresult + 1;
        }
-        if(StringUtils.isEmpty(request.getParameter("currentpage"))){
+        if(StringUtils.isEmpty(page)){
            currentpage = 0;
         }else{
-           currentpage = Integer.parseInt(request.getParameter("currentpage"));
+           currentpage = Integer.parseInt(page);
            
            if(currentpage<0)
            {
@@ -161,7 +165,7 @@ public class ${Bean}Action {
 		int endindex = startindex+maxresult-1;
 		pageView.setStartindex(startindex);
 		pageView.setEndindex(endindex);
-		pageView.setTotalrecord(this.${Bean.toLowerCase()}Manager.findAll().size());
+		pageView.setTotalrecord(n);
 		pageView.setCurrentpage(currentpage);
 		pageView.setTotalpage(pages);
 		return pageView;

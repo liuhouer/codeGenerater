@@ -7,8 +7,16 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 import com.${domain}.query.${Bean}Query;
 import com.${domain}.query.condition.${Bean}QueryCondition;
-@Service("${Bean}Query")
 
+/**
+ * @author bruce
+ * @date ${date}
+ * @email zhangyang226@gmial.com
+ * @site http://blog.northpark.cn | http://northpark.cn | orginazation https://github.com/jellyband
+ * 
+ */
+ 
+@Service("${Bean}Query")
 public class ${Bean}QueryImpl implements ${Bean}Query {
 
 	@Override

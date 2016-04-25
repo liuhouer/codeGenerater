@@ -12,6 +12,14 @@ import javax.persistence.Table;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.annotations.GenericGenerator;
 
+/**
+ * @author bruce
+ * @date ${date}
+ * @email zhangyang226@gmial.com
+ * @site http://blog.northpark.cn | http://northpark.cn | orginazation https://github.com/jellyband
+ * 
+ */
+
 @Entity
 @Table(name = "${tableName}")
 public class ${modelName} implements Serializable{
@@ -50,6 +58,7 @@ private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(generator = "paymentableGenerator") 
 	@GenericGenerator(name = "paymentableGenerator", strategy = "native") 
+	@Column(length = 6)	
 	private ${Property.Type} ${Property.Column};
 #else
 	@Column(length = $Property.length)
