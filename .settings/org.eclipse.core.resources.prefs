@@ -1,5 +1,5 @@
 eclipse.preferences.version=1
-encoding//res/template/model.java.vm=utf-8
+encoding//res/template/entity.java.vm=utf-8
 encoding//src/db/db.java=UTF-8
 encoding//src/generate/generateThing.java=gbk
 encoding//src/util/CreateFileUtil.java=gbk

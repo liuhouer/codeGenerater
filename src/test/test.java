@@ -12,7 +12,7 @@ public class test {
 //     	generateThing.generateAll("buci","D://opt//dir111");
 		
 		
-		generateThing.generateOneModle("bc_eq", "//Users//zhangyang//Documents//opt//dir666");
+		generateThing.generateOneModle("t_lvz_prize_record", "//Users//zhangyang//Documents//opt//dir1100");
 	}
 	
 	

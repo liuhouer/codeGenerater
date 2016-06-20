@@ -1,0 +1,62 @@
+package com.${domain}.entity;
+
+import com.bj58.sfft.utility.dao.annotation.Column;
+import com.bj58.sfft.utility.dao.annotation.Id;
+import com.bj58.sfft.utility.dao.annotation.Table;
+import com.jx.spat.gaea.serializer.component.annotation.GaeaMember;
+import com.jx.spat.gaea.serializer.component.annotation.GaeaSerializable;
+
+/**
+ * @author bruce
+ * @date ${date}
+ * @email zhangyang226@gmial.com
+ * @site http://blog.northpark.cn | http://northpark.cn | orginazation https://github.com/jellyband
+ * 
+ */
+
+@GaeaSerializable
+@Table(name = "${tableName}")
+public class ${modelName}Entity {
+
+#set ($i=0)
+#foreach($Property in $PropertyList)
+#set($i=$i+1)
+@GaeaMember
+#if($i==1)##判断主键
+@Id(insertable = true)
+@Column(name = "${Property.Column}")
+private long ${Property.Column};
+#else
+@Column(name = "${Property.Column}")
+private ${Property.Type} ${Property.Column};
+#end
+
+#end  
+
+
+#set ($j=0)
+#foreach($Property in $PropertyList)
+#set($j=$j+1)
+	#set ($namelen = ${Property.Name.length()}) 
+	
+#if($j==1)
+public long get${Property.Name.substring(0,1).toUpperCase()}${Property.Name.substring(1,$namelen)}() {
+	return ${Property.Column};	
+}
+	
+public void set${Property.Name.substring(0,1).toUpperCase()}${Property.Name.substring(1,$namelen)}(long ${Property.Column}) {
+	this.${Property.Column} = ${Property.Column};
+}
+	#else
+public ${Property.Type} get${Property.Name.substring(0,1).toUpperCase()}${Property.Name.substring(1,$namelen)}() {
+	return ${Property.Column};	
+}
+	
+public void set${Property.Name.substring(0,1).toUpperCase()}${Property.Name.substring(1,$namelen)}(${Property.Type} ${Property.Column}) {
+	this.${Property.Column} = ${Property.Column};
+}	
+	#end
+	
+#end
+
+}
