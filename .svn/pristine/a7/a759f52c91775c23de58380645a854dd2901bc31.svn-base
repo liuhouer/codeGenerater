@@ -15,13 +15,12 @@ import org.springframework.ui.velocity.VelocityEngineUtils;
 
 import util.CreateFileUtil;
 import util.MStringUtil;
-import util.PropertiesUtils;
 import util.Timers;
 import db.db;
 
 public class generateThing {
-	
-	public static final String defaultDomainsuffix = PropertiesUtils.getProp("defaultDomainsuffix");
+	 
+	public static final String defaultDomainsuffix = "com";
 	
 	public static void generateAll(String dataBaseName,String outpath) throws Exception{
 		List<String> tableName = db.getTable(dataBaseName);

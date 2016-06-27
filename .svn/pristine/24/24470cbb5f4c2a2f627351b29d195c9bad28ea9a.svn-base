@@ -31,8 +31,6 @@ public interface I${Bean}Service {
 			int pageindex,int pagesize,String orderby)throws Exception;
 	@OperationContract
 	public void update${Bean}Entity(${Bean}Entity e)throws Exception;
-	@OperationContract
-	public int getCount(String condition)throws Exception;
 
 }
 

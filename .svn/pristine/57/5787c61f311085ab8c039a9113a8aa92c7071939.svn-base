@@ -50,10 +50,6 @@ public class ${Bean}Service  extends CommonService implements I${Bean}Service{
 				condition, pageindex, pagesize, orderby);
 	}
 	
-	public int getCount(String condition) throws Exception {
-		return this.getCountBycondition(${Bean}Entity.class, condition);
-	}
-	
 
 	
 }
