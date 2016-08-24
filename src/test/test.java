@@ -10,7 +10,7 @@ public class test {
 		//初始化连接
 		db.init();
 		//生成单个表
-		generateThing.generateOneModle("t_lvz_prize_record", "//Users//zhangyang//Documents//opt//dir1100");
+		generateThing.generateOneModle("bc_eq", "//Users//zhangyang//Documents//opt//dir66666");
 	
 		//生成多个表
 	}

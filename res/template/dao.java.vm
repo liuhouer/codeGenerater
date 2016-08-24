@@ -1,0 +1,17 @@
+package com.${domain}.dao;
+
+import java.io.Serializable;
+
+
+import com.${domain}.model.${modelName};
+
+/**
+ * @author bruce
+ * @date ${date}
+ * @email zhangyang226@gmail.com
+ * @site http://blog.northpark.cn | http://northpark.cn | orginazation https://github.com/jellyband
+ * 
+ */
+public interface ${modelName}Dao extends HibernateDao<${modelName}, Serializable> {
+	
+}

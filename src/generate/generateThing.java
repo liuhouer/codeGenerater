@@ -157,7 +157,7 @@ public class generateThing {
 		}
 	}
 	
-	private static void writeOneModelFile(String templatepath , String filepath , String tableName){
+private static void writeOneModelFile(String templatepath , String filepath , String tableName){
 		
 		//1.读取模板信息，以及创建文件夹
 		try {
@@ -183,40 +183,38 @@ public class generateThing {
 //					if(StringUtils.isNotEmpty(table.getPackageName())){
 //						this_folder = this_folder +table.getPackageName();
 //					}
-//					if(StringUtils.isNotEmpty(templateName)&& templateName.equalsIgnoreCase("queryImpl")){
-//						this_folder =this_folder +"query"   ;
-//					}
-//					if(StringUtils.isNotEmpty(templateName)&& templateName.equalsIgnoreCase("queryCondition")){
-//						this_folder =this_folder +"query"   ;
-//					}
-					//service接口
-					if(StringUtils.isNotEmpty(templateName)&& templateName.equalsIgnoreCase("components")){
-						this_folder =this_folder +"components"   ;
+					if(StringUtils.isNotEmpty(templateName)&& templateName.equalsIgnoreCase("queryImpl")){
+						this_folder =this_folder +"query"   ;
 					}
-					
-					//serviceImpl接口
-					if(StringUtils.isNotEmpty(templateName)&& templateName.equalsIgnoreCase("contract")){
-						this_folder =this_folder +"contract"   ;
+					if(StringUtils.isNotEmpty(templateName)&& templateName.equalsIgnoreCase("queryCondition")){
+						this_folder =this_folder +"query"   ;
 					}
-					
-					//entity接口
-					if(StringUtils.isNotEmpty(templateName)&& templateName.equalsIgnoreCase("entity")){
-						this_folder =this_folder +"entity"   ;
+					if(StringUtils.isNotEmpty(templateName)&& templateName.equalsIgnoreCase("managerImpl")){
+						this_folder =this_folder +"manager"   ;
+					}
+					if(StringUtils.isNotEmpty(templateName)&& templateName.equalsIgnoreCase("daoImpl")){
+						this_folder =this_folder +"dao"   ;
 					}
 					//加载模板
 					String result = loadTemplate(templatepath,table,templateName+".java.vm");
 					// 创建文件
 					String fileName = null;
-					if(templateName.equals("entity")){
-						fileName = this_folder  +"/"+ table.getModelName() +"Entity" +".java";
+					if(StringUtils.isNotEmpty(templateName)&& templateName.equalsIgnoreCase("queryImpl")){
+						this_folder =this_folder +"/impl"   ;
+					}else
+					if(StringUtils.isNotEmpty(templateName)&& templateName.equalsIgnoreCase("queryCondition")){
+						this_folder =this_folder +"/condition"   ;
+					}else
+					if(StringUtils.isNotEmpty(templateName)&& templateName.equalsIgnoreCase("managerImpl")){
+						this_folder =this_folder +"/impl"   ;
+					}else
+					if(StringUtils.isNotEmpty(templateName)&& templateName.equalsIgnoreCase("daoImpl")){
+						this_folder =this_folder +"/impl"   ;
+					}else{
+					    this_folder = this_folder + "/"+ templateName;
 					}
-					else if(templateName.equals("contract")){
-						System.out.println("this......................"+this_folder);
-						fileName = this_folder  +"/" +"I"+table.getModelName() +"Service"+ ".java";
-					}
-					else if(templateName.equals("components")){
-						System.out.println("this......................"+this_folder);
-						fileName = this_folder  +"/" +table.getModelName() +"Service"+ ".java";
+					if(templateName.equals("model")){
+						fileName = this_folder  +"/"+ table.getModelName() + ".java";
 					}
 //					else if(templateName.equals("queryImpl")){
 //						System.out.println("this......................"+this_folder);
