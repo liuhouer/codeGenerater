@@ -2,13 +2,13 @@
 #set ($beanlen = $bean.length())
 #set ($Bean = $bean.substring(0,1).toUpperCase()+$bean.substring(1,$beanlen)) 
 
-package com.${domain}.manager;
+package ${suffix}.${domain}.manager;
 import java.util.List;
 import java.util.Map;
-import com.${domain}.model.${modelName};
+import ${suffix}.${domain}.model.${modelName};
 import java.util.LinkedHashMap;
-import com.${domain}.utils.PageView;
-import com.${domain}.utils.QueryResult;
+import ${suffix}.${domain}.utils.PageView;
+import ${suffix}.${domain}.utils.QueryResult;
 
 /**
  * @author bruce
