@@ -2,9 +2,9 @@
 #set ($beanlen = $bean.length())
 #set ($Bean = $bean.substring(0,1).toUpperCase()+$bean.substring(1,$beanlen)) 
 
-package com.${domain}.query;
-import com.${domain}.model.${modelName};
-import com.${domain}.query.condition.${modelName}QueryCondition;
+package ${suffix}.${domain}.query;
+import ${suffix}.${domain}.model.${modelName};
+import ${suffix}.${domain}.query.condition.${modelName}QueryCondition;
 /**
  * @author bruce
  * @date ${date}

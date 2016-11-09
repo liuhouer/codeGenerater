@@ -2,11 +2,11 @@
 #set ($beanlen = $bean.length())
 #set ($Bean = $bean.substring(0,1).toUpperCase()+$bean.substring(1,$beanlen)) 
 
-package com.${domain}.query.impl;
+package ${suffix}.${domain}.query.impl;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
-import com.${domain}.query.${Bean}Query;
-import com.${domain}.query.condition.${Bean}QueryCondition;
+import ${suffix}.${domain}.query.${Bean}Query;
+import ${suffix}.${domain}.query.condition.${Bean}QueryCondition;
 
 /**
  * @author bruce

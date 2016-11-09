@@ -255,6 +255,7 @@ private static void writeOneModelFile(String templatepath , String filepath , St
 			cont.put("PropertyList", table.getPropertyList());
 			cont.put("model", table.getModelName().toLowerCase());
 			cont.put("date", Timers.nowdate());
+			cont.put("suffix", generateThing.defaultDomainsuffix);
 			String packageName = table.getPackageName();
 			if(StringUtils.isNotEmpty(packageName)){
 				cont.put("packageName",  "." + table.getPackageName());

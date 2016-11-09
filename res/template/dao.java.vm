@@ -1,9 +1,9 @@
-package com.${domain}.dao;
+package ${suffix}.${domain}.dao;
 
 import java.io.Serializable;
 
 
-import com.${domain}.model.${modelName};
+import ${suffix}.${domain}.model.${modelName};
 
 /**
  * @author bruce
