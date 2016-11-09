@@ -102,7 +102,7 @@ public class ${Bean}ManagerImpl implements ${Bean}Manager {
 	}
 	
 	/* (non-Javadoc)
-	 * @see com.bruce.manager.${Bean}Manager#countSql(java.lang.String)
+	 * 根据sql查询条数
 	 */
 	@Override
 	public int countSql(String sql) {
@@ -111,7 +111,7 @@ public class ${Bean}ManagerImpl implements ${Bean}Manager {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.bruce.manager.${Bean}Manager#countHql(com.bruce.model.${Bean}, java.lang.String)
+	 * 根据hql查询条数
 	 */
 	@Override
 	public int countHql(${Bean} m, String wheresql) {
