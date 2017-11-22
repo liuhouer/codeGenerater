@@ -114,9 +114,9 @@ public class ${Bean}ManagerImpl implements ${Bean}Manager {
 	 * 根据hql查询条数
 	 */
 	@Override
-	public int countHql(${Bean} m, String wheresql) {
+	public int countHql(String wheresql) {
 		// TODO Auto-generated method stub
-		return ${bean.toLowerCase()}Dao.countHql(m.getClass(), wheresql);
+		return ${bean.toLowerCase()}Dao.countHql(${Bean}.class, wheresql);
 	}
 }
 
