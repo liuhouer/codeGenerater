@@ -2,12 +2,15 @@ package models;
 
 import java.util.List;
 
+import util.PropertiesUtils;
+
 public class Table {
 
 	private String modelName;
 	private String tableName;
 	private String packageName;
-	public static String domain = "bruce";
+//	public static String domain = "jx.blackface.gaea.usercenter";
+	public final static String domain = PropertiesUtils.getProp("domain");
 	private List<Column> propertyList;
 	
 	public Table(){

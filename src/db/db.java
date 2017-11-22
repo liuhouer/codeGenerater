@@ -9,9 +9,7 @@ import java.util.List;
 
 import models.Column;
 import models.Table;
-
-import org.apache.commons.lang.StringUtils;
-
+import util.PropertiesUtils;
 import util.TypeConvertUtil;
 
 public class db {
@@ -20,25 +18,14 @@ public class db {
 	public static Statement stat = null;
 
 	public static void init() {
-		getCon("mysql", "60.194.51.7", 3306, "root", "Yunluqwe");
-//		getBruceConn();
+		String driver = PropertiesUtils.getProp("db.driver");
+		String url = PropertiesUtils.getProp("db.url");
+		String user = PropertiesUtils.getProp("db.username");
+		String password = PropertiesUtils.getProp("db.password");
+		getCon(driver, url, user, password);
 	}
 	
-	public static void initBruce() {
-//		getCon("mysql", "192.168.0.120", 3306, "root", "Yunluqwe");
-		getBruceConn();
-	}
 	
-	public static void initLocal() {
-//		getCon("mysql", "192.168.0.120", 3306, "root", "Yunluqwe");
-		getLocalConn();
-	}
-
-	public static void init(String type, String dataSource, Integer port,
-			String user, String password) {
-		getCon(type, dataSource, port, user, password);
-	}
-
 	public static List<String> getDatabase() {
 		List<String> list = new ArrayList<String>();
 		try {
@@ -59,70 +46,14 @@ public class db {
 
 	}
 
-	private static void getCon(String type, String dataSource, Integer port,
+	private static void getCon(String driver, String url,
 			String user, String password) {
 		// 驱动程序名
-		String driver = "";
-		String urlstart = "";
-		if (type.equals("mysql")) {
-			driver = "com.mysql.jdbc.Driver";
-			urlstart = "jdbc:mysql://";
-			// urlstart =
-			// "jdbc:mysql://192.168.0.120:3306/yunlu?characterEncoding=UTF-8";
-			if (port == null)
-				port = 3306;
-		}
-		String url = urlstart + dataSource + ":" + port;
-		System.out.println(url + "-------url");
 		try {
 			// 加载驱动程序
 			Class.forName(driver);
 			// 连续数据库
 			con = DriverManager.getConnection(url, user, password);
-			if (!con.isClosed())
-				System.out.println("Succeeded connecting to the Database!");
-			// statement用来执行SQL语句
-			stat = con.createStatement();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("Sorry,can`t find the Driver!");
-		}
-
-	}
-
-	private static void getBruceConn() {
-		// 驱动程序名
-		String driver = "com.mysql.jdbc.Driver";
-		String url = "jdbc:mysql://123.56.129.117:3306/buci";
-		System.out.println(url + "-------url");
-		try {
-			// 加载驱动程序
-			Class.forName(driver);
-			// 连续数据库
-			con = DriverManager.getConnection(url, "robot", "lonelyrobot");
-			if (!con.isClosed())
-				System.out.println("Succeeded connecting to the Database!");
-			// statement用来执行SQL语句
-			stat = con.createStatement();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("Sorry,can`t find the Driver!");
-		}
-
-	}
-	
-	private static void getLocalConn() {
-		// 驱动程序名
-		String driver = "com.mysql.jdbc.Driver";
-		String url = "jdbc:mysql://localhost:3306/test";
-		System.out.println(url + "-------url");
-		try {
-			// 加载驱动程序
-			Class.forName(driver);
-			// 连续数据库
-			con = DriverManager.getConnection(url, "root", "root");
 			if (!con.isClosed())
 				System.out.println("Succeeded connecting to the Database!");
 			// statement用来执行SQL语句

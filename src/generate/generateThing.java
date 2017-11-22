@@ -15,12 +15,13 @@ import org.springframework.ui.velocity.VelocityEngineUtils;
 
 import util.CreateFileUtil;
 import util.MStringUtil;
+import util.PropertiesUtils;
+import util.Timers;
 import db.db;
 
 public class generateThing {
 	
-	public static final String defaultPackage = "bruce";
-	public static final String defaultDomainsuffix = "com";
+	public static final String defaultDomainsuffix = PropertiesUtils.getProp("defaultDomainsuffix");
 	
 	public static void generateAll(String dataBaseName,String outpath) throws Exception{
 		List<String> tableName = db.getTable(dataBaseName);
@@ -253,6 +254,8 @@ private static void writeOneModelFile(String templatepath , String filepath , St
 			cont.put("tableName", table.getTableName());
 			cont.put("PropertyList", table.getPropertyList());
 			cont.put("model", table.getModelName().toLowerCase());
+			cont.put("date", Timers.nowdate());
+			cont.put("suffix", generateThing.defaultDomainsuffix);
 			String packageName = table.getPackageName();
 			if(StringUtils.isNotEmpty(packageName)){
 				cont.put("packageName",  "." + table.getPackageName());

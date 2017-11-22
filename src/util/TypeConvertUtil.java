@@ -23,7 +23,7 @@ public class TypeConvertUtil {
 			else if(type.length()>7&&type.substring(0, 7).equals("tinyint"))
 				return "Integer";
 			else if(type.length()>6&&type.substring(0, 6).equals("bigint"))
-				return "Integer";
+				return "long";
 			else
 				return null;
 		}

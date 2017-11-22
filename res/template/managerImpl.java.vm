@@ -2,7 +2,7 @@
 #set ($beanlen = $bean.length())
 #set ($Bean = $bean.substring(0,1).toUpperCase()+$bean.substring(1,$beanlen)) 
 
-package com.${domain}.manager.impl;
+package ${suffix}.${domain}.manager.impl;
 
 import java.io.Serializable;
 import java.util.List;
@@ -10,9 +10,9 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
-import com.${domain}.model.$Bean;
-import com.${domain}.manager.${Bean}Manager;
-import com.${domain}.dao.${Bean}Dao;
+import ${suffix}.${domain}.model.$Bean;
+import ${suffix}.${domain}.manager.${Bean}Manager;
+import ${suffix}.${domain}.dao.${Bean}Dao;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -20,14 +20,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.${domain}.utils.MyConstant;
-import com.${domain}.utils.PageView;
-import com.${domain}.utils.QueryResult;
+import ${suffix}.${domain}.utils.MyConstant;
+import ${suffix}.${domain}.utils.PageView;
+import ${suffix}.${domain}.utils.QueryResult;
 
 /**
  * @author bruce
  * @date ${date}
- * @email zhangyang226@gmial.com
+ * @email zhangyang226@gmail.com
  * @site http://blog.northpark.cn | http://northpark.cn | orginazation https://github.com/jellyband
  * 
  */
@@ -70,7 +70,7 @@ public class ${Bean}ManagerImpl implements ${Bean}Manager {
 	public QueryResult<${Bean}> findByCondition(PageView<${Bean}> p,
 			String wheresql, LinkedHashMap<String, String> order) {
 		QueryResult qrs = ${bean.toLowerCase()}Dao.findByCondition(p.getStartindex(),
-				MyConstant.MAXRESULT, wheresql, order);
+				p.getMaxresult(), wheresql, order);
 		return qrs;
 	}
 
@@ -102,7 +102,7 @@ public class ${Bean}ManagerImpl implements ${Bean}Manager {
 	}
 	
 	/* (non-Javadoc)
-	 * @see com.bruce.manager.${Bean}Manager#countSql(java.lang.String)
+	 * 根据sql查询条数
 	 */
 	@Override
 	public int countSql(String sql) {
@@ -111,12 +111,12 @@ public class ${Bean}ManagerImpl implements ${Bean}Manager {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.bruce.manager.${Bean}Manager#countHql(com.bruce.model.${Bean}, java.lang.String)
+	 * 根据hql查询条数
 	 */
 	@Override
-	public int countHql(${Bean} m, String wheresql) {
+	public int countHql(String wheresql) {
 		// TODO Auto-generated method stub
-		return ${bean.toLowerCase()}.countHql(m.getClass(), wheresql);
+		return ${bean.toLowerCase()}Dao.countHql(${Bean}.class, wheresql);
 	}
 }
 

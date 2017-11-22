@@ -7,12 +7,12 @@ public class test {
 	
 	
 	public static void main(String[] args) throws Exception{
-		db.initBruce();
-	    //	ConnectServer.init();
-//     	generateThing.generateAll("buci","D://opt//dir111");
-		
-		
-		generateThing.generateOneModle("bc_eq", "//Users//zhangyang//Documents//opt//dir666");
+		//初始化连接
+		db.init();
+		//生成单个表
+		generateThing.generateOneModle("bc_tags", "d://opt//dir//dir111");
+	
+		//生成多个表
 	}
 	
 	
