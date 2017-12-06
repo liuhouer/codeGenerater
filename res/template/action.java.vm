@@ -34,142 +34,193 @@ import javax.servlet.http.HttpSession;
  * 
  */
 @Controller
-@RequestMapping("/${bean.toLowerCase()}Action")
-@SessionAttributes({ "list", "${bean.toLowerCase()}" })
+@RequestMapping("/${bean.toLowerCase()}")
 public class ${Bean}Action {
 
- private final String LIST_ACTION = "redirect:/${bean.toLowerCase()}Action/findAll";
+private static final Logger LOGGER = Logger
+         .getLogger(${Bean}.class);
  @Autowired	
  private ${Bean}Manager ${bean.toLowerCase()}Manager;
  @Autowired	
  private ${Bean}Query ${bean.toLowerCase()}Query;
 
 	
-	@RequestMapping("/toAdd")
-	public String toAdd(ModelMap map) {
-		//List<${Bean}> Pidlist = ${Bean.toLowerCase()}Manager.findAll();
-		//map.addAttribute("Pidlist",Pidlist);
-		return "admin/${Bean.toLowerCase()}/${Bean.toLowerCase()}Add";
-	}
-	
-	@RequestMapping("/toEdit")
-	public String toEdit(HttpServletRequest request, @RequestParam("id") Integer id,ModelMap map) {
-		//String id = request.getParameter("id");
-		//List<${Bean}> Pidlist = ${Bean.toLowerCase()}Manager.findAll();
-		//map.addAttribute("Pidlist",Pidlist);
-		if(null!=id && 0!=id){
-			${Bean} model = ${Bean.toLowerCase()}Manager.find${Bean}(id);
-			map.put("model", model);
-		}
-		return "admin/${Bean.toLowerCase()}/${Bean.toLowerCase()}Edit";
-	}
-	
-	@RequestMapping("/remove")
-	public String remove(@RequestParam("id") Integer id) {
-		this.${Bean.toLowerCase()}Manager.del${Bean}(id);
-		return LIST_ACTION;
-	}
-	
-	@RequestMapping("/removes")
-	public String removes(@RequestParam("ids") String ids) {
-		String[] str = ids.split(",");
-		for(String s :str){
-			this.${Bean.toLowerCase()}Manager.del${Bean}(Integer.parseInt(s));
-		}
-		return LIST_ACTION;
-	}
-	
-	@RequestMapping("/update")
-	public String update(${Bean} model) {
-		this.${Bean.toLowerCase()}Manager.update${Bean}(model);
-		return LIST_ACTION;
-	}
-	
-
-	@RequestMapping("/add${Bean}")
-	public String add${Bean}(${Bean} ${bean.toLowerCase()}) {
-		this.${bean.toLowerCase()}Manager.add${Bean}(${bean.toLowerCase()});
-		return LIST_ACTION;
-	}
-
-	@RequestMapping("/find${Bean}")
-	private String find${Bean}(@RequestParam("id") Integer id, ModelMap map) {
-		${Bean} ${bean.toLowerCase()} = this.${bean.toLowerCase()}Manager.find${Bean}(id);
-		map.addAttribute("${bean.toLowerCase()}", ${bean.toLowerCase()});
-		return "findresult";
-	}
-
-	@RequestMapping("/del${Bean}")
-	public String del${Bean}(@RequestParam("id") Integer id) {
-		this.${bean.toLowerCase()}Manager.del${Bean}(id);
-		return LIST_ACTION;
-	}
-
-	@RequestMapping("/update${Bean}")
-	public String update${Bean}(@RequestParam("id") Integer id) {
-		${Bean} ${bean.toLowerCase()} = this.${bean.toLowerCase()}Manager.find${Bean}(id);
-		this.${bean.toLowerCase()}Manager.update${Bean}(${bean.toLowerCase()});
-		return LIST_ACTION;
-	}
-
-	@RequestMapping(value="/findAll")
-	public String findAll(ModelMap map,${Bean}QueryCondition condition,HttpServletRequest request,
-			HttpServletResponse response, HttpSession session) {
-		String whereSql = ${Bean.toLowerCase()}Query.getSql(condition);
+	/**
+	 * 查看列表
+	 * @param map
+	 * @param condition
+	 * @param request
+	 * @param response
+	 * @param session
+	 * @return
+	 * @throws IOException
+	 */
+	@RequestMapping(value="/list")
+	public String list1(ModelMap map,${bean}QueryCondition condition,HttpServletRequest request,
+			HttpServletResponse response, HttpSession session) throws IOException {
 		
-		PageView<${Bean}> pageView = getPageView(null, whereSql);
+		String result="/${bean.toLowerCase()}";
+		String sql = ${bean.toLowerCase()}Query.getMixSql(condition);
 		
-
-		LinkedHashMap<String, String> order = new LinkedHashMap<String, String>();
-		order.put("createtime", "desc");
-
-		QueryResult<${Bean}> qrs = this.${Bean.toLowerCase()}Manager.findByCondition(pageView,
-				whereSql, order);
-		List<${Bean}> list = qrs.getResultlist();
-		map.addAttribute("pageView", pageView);
+		LOGGER.info("sql ---"+sql);
+		
+		//定义pageview
+		PageView<List<Map<String, Object>>> pageview = new PageView<List<Map<String,Object>>>(1,MyConstant.MAXRESULT);
+		
+		//获取分页结构不获取数据
+		
+		pageview = this.${bean.toLowerCase()}Manager.getMixMapPage(pageview, sql);
+		
+		map.addAttribute("pageView", pageview);
 		map.put("condition", condition);
-		map.addAttribute("list", list);
-		map.addAttribute("actionUrl","${Bean.toLowerCase()}Action/findAll" );
+		map.addAttribute("actionUrl","/${bean.toLowerCase()}/list");
+		
+		
 
-		return "admin/${Bean.toLowerCase()}/${Bean.toLowerCase()}List";
+		return result;
 	}
+	
+	
 
-	private PageView<${Bean}> getPageView(String page,
-			String whereSql) {
-		PageView<${Bean}> pageView = new PageView<${Bean}>();
-		int currentpage = 0; //当前页码
-		int pages = 0; //总页数
-		int n = this.${Bean.toLowerCase()}Manager.countHql(new ${Bean}(), whereSql);;
-		int maxresult = MyConstant.MAXRESULT; /** 每页显示记录数**/
-        if(n % maxresult==0)
-       {
-          pages = n / maxresult ;
-       }else{
-          pages = n / maxresult + 1;
-       }
-        if(StringUtils.isEmpty(page)){
-           currentpage = 0;
-        }else{
-           currentpage = Integer.parseInt(page);
-           
-           if(currentpage<0)
-           {
-              currentpage = 0;
-           }
-           if(currentpage>=pages)
-           {
-              currentpage = pages - 1;
-           }
-        }
-		int startindex = currentpage*maxresult;
-		int endindex = startindex+maxresult-1;
-		pageView.setStartindex(startindex);
-		pageView.setEndindex(endindex);
-		pageView.setTotalrecord(n);
-		pageView.setCurrentpage(currentpage);
-		pageView.setTotalpage(pages);
-		pageView.setMaxresult(maxresult);
-		return pageView;
+	/**
+	 * 查看列表分页
+	 * @param map
+	 * @param condition
+	 * @param request
+	 * @param response
+	 * @param session
+	 * @return
+	 * @throws IOException
+	 */
+	@RequestMapping(value="/list/page/{page}")
+	public String list2(ModelMap map,${bean}QueryCondition condition, @PathVariable String page,HttpServletRequest request,
+			HttpServletResponse response, HttpSession session) throws IOException {
+		
+		String result="/${bean.toLowerCase()}";
+		String sql = ${bean.toLowerCase()}Query.getMixSql(condition);
+		
+		LOGGER.info("sql ---"+sql);
+		int currentpage = Integer.parseInt(page);
+		
+		//定义pageview
+		PageView<List<Map<String, Object>>> pageview = new PageView<List<Map<String,Object>>>(currentpage,MyConstant.MAXRESULT);
+		
+		//获取分页结构不获取数据
+		
+		pageview = this.${bean.toLowerCase()}Manager.getMixMapPage(pageview, sql);
+		
+		map.addAttribute("pageView", pageview);
+		map.put("condition", condition);
+		map.addAttribute("actionUrl","/${bean.toLowerCase()}/list");
+		map.addAttribute("page", page);
+		
+
+		return result;
+	}
+	
+	
+	
+	//异步分页查询数据
+	@RequestMapping(value="/query")
+	public String plazzquery(ModelMap map,HttpServletRequest request,${bean}QueryCondition condition, HttpSession session,String userid) {
+		String currentpage = request.getParameter("currentpage");
+		
+		String sql = ${bean.toLowerCase()}Query.getMixSql(condition);
+		
+		//定义pageview
+		PageView<List<Map<String, Object>>> pageview = new PageView<List<Map<String,Object>>>(Integer.parseInt(currentpage),MyConstant.MAXRESULT);
+		
+		
+		//根据分页仅仅获取数据 
+		List<Map<String, Object>> list = this.${bean.toLowerCase()}Manager.findmixByCondition(pageview,sql);
+		
+		
+		
+		map.addAttribute("list", list);
+		
+		
+		return "/page/${bean.toLowerCase()}/${bean.toLowerCase()}data";
+	}
+	
+	
+	
+	@RequestMapping("/list3")
+	public String list3(ModelMap map,${bean}QueryCondition condition, String page,HttpServletRequest request,
+			HttpServletResponse response, HttpSession session)  {
+		String result="/equp";
+		try {
+			session.removeAttribute("tabs");
+			String whereSql = ${bean.toLowerCase()}Query.getSql(condition);
+			
+			
+			//定义pageview
+			PageView<${bean}> pageview  =  new PageView<${bean}>(1, MyConstant.MAXRESULT); 
+			
+			LOGGER.info("sql ---"+whereSql);
+			
+			//排序条件
+			LinkedHashMap<String, String> order = new LinkedHashMap<String, String>();
+			order.put("date", "desc");
+			
+			
+			QueryResult<${bean}> qr = this.${bean.toLowerCase()}Manager.findByCondition(pageview, whereSql, order);
+			List<${bean}> resultlist = qr.getResultlist();
+			
+			
+			//触发生成页码等等
+			pageview.setQueryResult(qr);
+			map.addAttribute("pageView", pageview);
+			map.addAttribute("list", resultlist);
+			map.addAttribute("actionUrl","/${bean.toLowerCase()}");
+		} catch (Exception e) {
+			// TODO: handle exception
+			LOGGER.error("eqacton------>",e);
+		}
+		
+		
+
+		return result;
+	}
+	
+	@RequestMapping(value="/${bean.toLowerCase()}/page/{page}")
+	public String list4(ModelMap map,${bean}QueryCondition condition, @PathVariable String page,HttpServletRequest request,
+			HttpServletResponse response, HttpSession session) throws IOException {
+
+		String result="/${bean.toLowerCase()}";
+		session.removeAttribute("tabs");
+		String whereSql = ${bean.toLowerCase()}Query.getSql(condition);
+		
+		
+		
+		//定义pageview
+		PageView<${bean}> pageview  =  new PageView<${bean}>(Integer.parseInt(page), MyConstant.MAXRESULT); 
+		
+		String keyword = request.getParameter("keyword");
+		if(StringUtils.isNotEmpty(keyword)){
+			keyword = WAQ.forSQL().escapeSql(keyword);
+			whereSql+=" and title like '%"+keyword+"%' ";
+			
+			map.addAttribute("keyword", keyword);
+			
+		}
+		LOGGER.info("sql ---"+whereSql);
+		
+		//排序条件
+		LinkedHashMap<String, String> order = new LinkedHashMap<String, String>();
+		order.put("date", "desc");
+		
+		
+		QueryResult<${bean}> qr = this.${bean.toLowerCase()}Manager.findByCondition(pageview, whereSql, order);
+		List<${bean}> resultlist = qr.getResultlist();
+		//触发生成页码等等
+		pageview.setQueryResult(qr);
+		map.addAttribute("pageView", pageview);
+		map.addAttribute("list", resultlist);
+		map.addAttribute("actionUrl","/romeo");
+		map.addAttribute("page", page);
+		
+
+		return result;
 	}
 
 }

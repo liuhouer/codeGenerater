@@ -29,6 +29,16 @@ public interface ${Bean}Manager {
 
 	public boolean update${Bean}($Bean $bean.toLowerCase());
 	
+	
+	/**
+	 * 单表返回clazz
+	 * 同步：返回分页数据和分页结构
+	 *
+	 * @param p
+	 * @param wheresql
+	 * @param order
+	 * @return
+	 */
 	public QueryResult<${Bean}> findByCondition(PageView<${Bean}> p,
 			String wheresql, LinkedHashMap<String, String> order);
 
@@ -36,23 +46,18 @@ public interface ${Bean}Manager {
 			String wheresql);
 			
 	/**
-	 * sql+
+	 * 根据sql语句预查询？？？
 	 * @return
 	 */
 	public List<${Bean}> querySql(String sql,Object... obj);
 	
 	/**
-	 * sql
+	 * 根据sql语句查询
 	 * @return
 	 */
 	public List<${Bean}> querySql(String sql);
 	
 	
-	/**
-	 * sqlmap
-	 * @return
-	 */
-	public PageView<List<Map<String, Object>>> querySqlMap(String sql,PageView<List<Map<String,Object>>> pageView);
 
 	
 	/**
@@ -67,14 +72,46 @@ public interface ${Bean}Manager {
 	
 	
 	/**
-	 * 根据实体查询条数
+	 * 根据hql查询条数
 	 * 
-	 * @param sql
-	 *            SQL语句
+	 * @param hql
+	 *            hql语句
 	 * 
 	 * @return int
 	 */
 	public  int countHql(String wheresql);
+	
+	
+    /**
+	 * 直接执行sql语句  更新、删除..
+	 * 
+	 * @param sql
+	 *            SQL语句
+	 * 
+	 */
+	public  void executeSql(String sql);
+	
+	
+	/**
+	 * 多表关联mix
+	 * 
+	 * 异步：根据页码获取当前页数据
+	 *
+	 * @param pageview
+	 * @param sql
+	 * @return
+	 */
+	public List<Map<String, Object>> findmixByCondition(PageView<List<Map<String, Object>>> pageview,String sql) ;
+	
+	/**
+	 * 多表关联mix
+	 * 
+	 * 同步：获取分页结构不获取数据
+	 * @param pageview
+	 * @param sql
+	 * @return
+	 */
+	public PageView<List<Map<String, Object>>>  getMixMapPage(PageView<List<Map<String, Object>>> pageview, String sql);
 	
 
 	

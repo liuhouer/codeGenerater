@@ -26,6 +26,15 @@ public class ${Bean}QueryImpl implements ${Bean}Query {
         
 		return sql.toString();
 	}
+	
+	@Override
+	public String getMixSql(${Bean}QueryCondition condition) {
+		// TODO Auto-generated method stub
+		StringBuilder sql = new StringBuilder(" where 1=1");
+		
+        
+		return sql.toString();
+	}
 
 }
 
