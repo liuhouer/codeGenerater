@@ -94,6 +94,13 @@ public class ${Bean}ManagerImpl implements ${Bean}Manager {
 		// TODO Auto-generated method stub
 		return ${bean.toLowerCase()}Dao.querySql(sql, ${Bean}.class);
 	}
+	
+	
+	@Override
+	public List<Map<String, Object>> querySqlMap(String sql) {
+		// TODO Auto-generated method stub
+		return ${bean.toLowerCase()}Dao.querySql(sql);
+	}
 
 	
 	/* (non-Javadoc)

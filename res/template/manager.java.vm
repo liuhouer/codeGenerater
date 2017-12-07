@@ -46,16 +46,23 @@ public interface ${Bean}Manager {
 			String wheresql);
 			
 	/**
-	 * 根据sql语句预查询？？？
+	 * 根据sql语句预查询？？？返回实体结果集
 	 * @return
 	 */
 	public List<${Bean}> querySql(String sql,Object... obj);
 	
 	/**
-	 * 根据sql语句查询
+	 * 根据sql语句返回实体结果集
 	 * @return
 	 */
 	public List<${Bean}> querySql(String sql);
+	
+	
+	/**
+	 * 根据sql语句返回map结果
+	 * @return
+	 */
+	public List<Map<String, Object>> querySqlMap(String sql);
 	
 	
 
