@@ -1,0 +1,24 @@
+#set ($bean = $modelName) 
+#set ($beanlen = $bean.length())
+#set ($Bean = $bean.substring(0,1).toUpperCase()+$bean.substring(1,$beanlen)) 
+
+package ${suffix}.${domain}.dao.impl;
+
+import java.io.Serializable;
+
+import org.springframework.stereotype.Service;
+
+import ${suffix}.${domain}.model.$Bean;
+import ${suffix}.${domain}.dao.${Bean}Dao;
+/**
+ * @author bruce
+ * @date ${date}
+ * @email zhangyang226@gmail.com
+ * @site http://blog.northpark.cn | http://northpark.cn | orginazation https://github.com/jellyband
+ * 
+ */
+
+@Service("${bean}Dao")
+public class ${Bean}DaoImpl extends HibernateDaoImpl<$Bean, Serializable> implements ${Bean}Dao {
+
+}

@@ -1,0 +1,124 @@
+package ${suffix}.${domain}.model;
+
+import java.io.Serializable;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.hibernate.annotations.GenericGenerator;
+
+/**
+ * @author bruce
+ * @date ${date}
+ * @email zhangyang226@gmail.com
+ * @site http://blog.northpark.cn | http://northpark.cn | orginazation https://github.com/jellyband
+ * 
+ */
+
+@Entity
+@Table(name = "${tableName}")
+public class ${modelName} implements Serializable{
+
+/**
+ *
+ * serialVersionUID
+ */
+private static final long serialVersionUID = 1L;
+
+#foreach($Property in $PropertyList)
+#if( ${Property.length} == 0 )		## 判断数据库字段类型字符串是否包含长度
+#if(${Property.Name.equalsIgnoreCase("id")})
+  /* 注释掉的uuid模板
+	@Id
+	@GeneratedValue(generator = "system-uuid")
+	@GenericGenerator(name = "system-uuid", strategy = "uuid")  */
+	
+	/* 下面是自增的native ID方式 */
+	@Id
+	@GeneratedValue(generator = "paymentableGenerator") 
+	@GenericGenerator(name = "paymentableGenerator", strategy = "native")                                                                      
+	private ${Property.Type} ${Property.Column};
+#else
+	
+	private ${Property.Type} ${Property.Column};
+#end
+#else		
+#if( ${Property.Name.equalsIgnoreCase("id")} )
+	 /* 注释掉的uuid模板
+	@Id
+	@GeneratedValue(generator = "system-uuid")
+	@GenericGenerator(name = "system-uuid", strategy = "uuid")  */
+	
+	/* 下面是自增的native ID方式 */
+	@Id
+	@GeneratedValue(generator = "paymentableGenerator") 
+	@GenericGenerator(name = "paymentableGenerator", strategy = "native") 
+	@Column(length = 6)	
+	private ${Property.Type} ${Property.Column};
+#else
+	@Column(length = $Property.length)
+	private ${Property.Type} ${Property.Column};
+#end  
+#end  
+
+#end 
+
+#foreach($Property in $PropertyList)
+	#set ($namelen = ${Property.Name.length()}) 
+	public ${Property.Type} get${Property.Name.substring(0,1).toUpperCase()}${Property.Name.substring(1,$namelen)}() {
+		return ${Property.Column};	
+	}
+	
+	public void set${Property.Name.substring(0,1).toUpperCase()}${Property.Name.substring(1,$namelen)}(${Property.Type} ${Property.Column}) {
+		this.${Property.Column} = ${Property.Column};
+	}
+#end
+
+    @Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
+	}
+	
+	/*这里是mybatis部分代码
+	
+	#foreach($Property in $PropertyList)${Property.Column},#end
+	
+
+	#foreach($Property in $PropertyList)
+	#{${Property.Column}},#end
+	
+	<update id="updateModel" parameterType="com.mai.app.entity.${modelName}">
+        update ${modelName}
+        <set>
+        #foreach($Property in $PropertyList)
+        
+	   	 ${Property.Column} = #{${Property.Column}},
+	   	 
+	    #end
+        </set>
+        <where>
+         id = #{id}
+        </where>
+    </update>
+    
+    
+    
+    <select id="findAllByPage"  
+            resultType="com.mai.X.entity.${modelName}">
+        select * from modelName
+    </select>
+    
+    <select id="findByID"  parameterType="string"
+            resultType="com.mai.X.entity.${modelName}">
+        select * from ${modelName} where ${modelName}ID = #{id}
+    </select>
+	
+	
+	
+	*/
+}
