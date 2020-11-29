@@ -1,2 +1,28 @@
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# project settings #
+*.class
+.classpath
+.project
+/.settings/
+/build/
 /target/
+/logs/
+/.idea/
+.factorypath
+.DS_Store
+
+
+#primary config info #
 config.properties
+hikaricp.properties
+
+/np-web.iml
+/src/main/resources/config.properties--offline
+/src/main/resources/config.properties
