@@ -6,6 +6,8 @@
 *.war
 *.ear
 
+
+
 # project settings #
 *.class
 .classpath
@@ -15,6 +17,8 @@
 /target/
 /logs/
 /.idea/
+/outputDIR/
+*.log
 .factorypath
 .DS_Store
 
