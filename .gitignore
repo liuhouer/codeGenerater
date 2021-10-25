@@ -27,5 +27,5 @@
 config.properties
 hikaricp.properties
 
-/np-web.iml
+*.iml
 /src/main/resources/config.properties
