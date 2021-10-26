@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Map;
 import ${suffix}.${domain}.model.${modelName};
 import java.util.LinkedHashMap;
-import ${suffix}.${domain}.utils.PageView;
-import ${suffix}.${domain}.utils.QueryResult;
+import ${suffix}.${domain}.utils.page.PageView;
+import ${suffix}.${domain}.utils.page.QueryResult;
 
 /**
  * @author bruce
@@ -19,15 +19,15 @@ import ${suffix}.${domain}.utils.QueryResult;
  */
 public interface ${Bean}Manager {
 	
-	public $Bean find$Bean(Integer id);
+	$Bean find$Bean(Integer id);
 
-	public List<$Bean> findAll();
+	List<$Bean> findAll();
 
-	public void add${Bean}($Bean $bean.toLowerCase());
+	void add${Bean}($Bean $bean.toLowerCase());
 
-	public boolean del${Bean}(Integer id);
+	boolean del${Bean}(Integer id);
 
-	public boolean update${Bean}($Bean $bean.toLowerCase());
+	boolean update${Bean}($Bean $bean.toLowerCase());
 	
 	
 	/**
@@ -39,30 +39,30 @@ public interface ${Bean}Manager {
 	 * @param order
 	 * @return
 	 */
-	public QueryResult<${Bean}> findByCondition(PageView<${Bean}> p,
+	QueryResult<${Bean}> findByCondition(PageView<${Bean}> p,
 			String wheresql, LinkedHashMap<String, String> order);
 
-	public QueryResult<${Bean}> findByCondition(
+	QueryResult<${Bean}> findByCondition(
 			String wheresql);
 			
 	/**
 	 * 根据sql语句预查询？？？返回实体结果集
 	 * @return
 	 */
-	public List<${Bean}> querySql(String sql,Object... obj);
+	List<${Bean}> querySql(String sql,Object... obj);
 	
 	/**
 	 * 根据sql语句返回实体结果集
 	 * @return
 	 */
-	public List<${Bean}> querySql(String sql);
+	List<${Bean}> querySql(String sql);
 	
 	
 	/**
 	 * 根据sql语句返回map结果
 	 * @return
 	 */
-	public List<Map<String, Object>> querySqlMap(String sql);
+	List<Map<String, Object>> querySqlMap(String sql);
 	
 	
 
@@ -75,18 +75,17 @@ public interface ${Bean}Manager {
 	 * 
 	 * @return int
 	 */
-	public int countSql(String sql) ;
+	int countSql(String sql) ;
 	
 	
 	/**
 	 * 根据hql查询条数
 	 * 
-	 * @param hql
-	 *            hql语句
-	 * 
+	 * @param whereSql
+	 *
 	 * @return int
 	 */
-	public  int countHql(String wheresql);
+	 int countHql(String whereSql);
 	
 	
     /**
@@ -96,7 +95,7 @@ public interface ${Bean}Manager {
 	 *            SQL语句
 	 * 
 	 */
-	public  void executeSql(String sql);
+	 void executeSql(String sql);
 	
 	
 	/**
@@ -108,7 +107,7 @@ public interface ${Bean}Manager {
 	 * @param sql
 	 * @return
 	 */
-	public List<Map<String, Object>> findmixByCondition(PageView<List<Map<String, Object>>> pageview,String sql) ;
+	List<Map<String, Object>> findmixByCondition(PageView<List<Map<String, Object>>> pageview,String sql) ;
 	
 	/**
 	 * 多表关联mix
@@ -118,7 +117,7 @@ public interface ${Bean}Manager {
 	 * @param sql
 	 * @return
 	 */
-	public PageView<List<Map<String, Object>>>  getMixMapPage(PageView<List<Map<String, Object>>> pageview, String sql);
+	PageView<List<Map<String, Object>>>  getMixMapPage(PageView<List<Map<String, Object>>> pageview, String sql);
 	
 
 	

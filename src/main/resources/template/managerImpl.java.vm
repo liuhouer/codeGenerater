@@ -21,8 +21,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ${suffix}.${domain}.utils.MyConstant;
-import ${suffix}.${domain}.utils.PageView;
-import ${suffix}.${domain}.utils.QueryResult;
+import ${suffix}.${domain}.utils.page.PageView;
+import ${suffix}.${domain}.utils.page.QueryResult;
 
 /**
  * @author bruce
@@ -125,14 +125,14 @@ public class ${Bean}ManagerImpl implements ${Bean}Manager {
 	@Override
 	public void executeSql(String sql) {
 		// TODO Auto-generated method stub
-		 ${bean.toLowerCase()}Dao.executess(sql);
+		 ${bean.toLowerCase()}Dao.execSQL(sql);
 	}
 	
 	@Override
 	public List<Map<String, Object>> findmixByCondition(PageView<List<Map<String,Object>>> pageview,String sql) {
 		
 		
-		List<Map<String, Object>> list = ${bean.toLowerCase()}Dao.QuerySQLForMapList(sql, pageview);
+		List<Map<String, Object>> list = ${bean.toLowerCase()}Dao.querySQLForMapList(sql, pageview);
 		
 		return list;
 		
@@ -143,7 +143,7 @@ public class ${Bean}ManagerImpl implements ${Bean}Manager {
 	@Override
 	public PageView<List<Map<String, Object>>> getMixMapPage(PageView<List<Map<String, Object>>> pageview, String sql) {
 		
-		return ${bean.toLowerCase()}Dao.QuerySQLCountForMapList(sql, pageview);
+		return ${bean.toLowerCase()}Dao.querySQLCountForMapList(sql, pageview);
 	}
 	
 }

@@ -16,14 +16,16 @@ import ${suffix}.${domain}.manager.${Bean}Manager;
 import ${suffix}.${domain}.model.$Bean;
 import ${suffix}.${domain}.query.${Bean}Query;
 import ${suffix}.${domain}.query.condition.${Bean}QueryCondition;
-import ${suffix}.${domain}.utils.MyConstant;
-import ${suffix}.${domain}.utils.PageView;
-import ${suffix}.${domain}.utils.QueryResult;
+import ${suffix}.${domain}.utils.page.MyConstant;
+import ${suffix}.${domain}.utils.page.PageView;
+import ${suffix}.${domain}.utils.page.QueryResult;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.LinkedHashMap;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
+import java.io.IOException;
 
 
 /**
@@ -35,10 +37,9 @@ import javax.servlet.http.HttpSession;
  */
 @Controller
 @RequestMapping("/${bean.toLowerCase()}")
+@Slf4j
 public class ${Bean}Action {
 
-private static final Logger LOGGER = Logger
-         .getLogger(${Bean}.class);
  @Autowired	
  private ${Bean}Manager ${bean.toLowerCase()}Manager;
  @Autowired	
@@ -62,7 +63,7 @@ private static final Logger LOGGER = Logger
 		String result="/${bean.toLowerCase()}";
 		String sql = ${bean.toLowerCase()}Query.getMixSql(condition);
 		
-		LOGGER.info("sql ---"+sql);
+		log.info("sql ---"+sql);
 		
 		//定义pageview
 		PageView<List<Map<String, Object>>> pageview = new PageView<List<Map<String,Object>>>(1,MyConstant.MAXRESULT);
@@ -99,7 +100,7 @@ private static final Logger LOGGER = Logger
 		String result="/${bean.toLowerCase()}";
 		String sql = ${bean.toLowerCase()}Query.getMixSql(condition);
 		
-		LOGGER.info("sql ---"+sql);
+		log.info("sql ---"+sql);
 		int currentpage = Integer.parseInt(page);
 		
 		//定义pageview
@@ -156,7 +157,7 @@ private static final Logger LOGGER = Logger
 			//定义pageview
 			PageView<${bean}> pageview  =  new PageView<${bean}>(1, MyConstant.MAXRESULT); 
 			
-			LOGGER.info("sql ---"+whereSql);
+			log.info("sql ---"+whereSql);
 			
 			//排序条件
 			LinkedHashMap<String, String> order = new LinkedHashMap<String, String>();
@@ -174,7 +175,7 @@ private static final Logger LOGGER = Logger
 			map.addAttribute("actionUrl","/${bean.toLowerCase()}");
 		} catch (Exception e) {
 			// TODO: handle exception
-			LOGGER.error("eqacton------>",e);
+			log.error("eqacton------>",e);
 		}
 		
 		
@@ -203,7 +204,7 @@ private static final Logger LOGGER = Logger
 			map.addAttribute("keyword", keyword);
 			
 		}
-		LOGGER.info("sql ---"+whereSql);
+		log.info("sql ---"+whereSql);
 		
 		//排序条件
 		LinkedHashMap<String, String> order = new LinkedHashMap<String, String>();
