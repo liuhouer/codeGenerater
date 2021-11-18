@@ -6,6 +6,7 @@ public class Column {
 	private String column;
 	private String type;
 	private int length;
+	private String comment;
 	public String getName() {
 		return name;
 	}
@@ -30,5 +31,12 @@ public class Column {
 	public void setLength(int length) {
 		this.length = length;
 	}
-	
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
 }

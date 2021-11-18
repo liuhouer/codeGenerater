@@ -98,7 +98,7 @@ public class db {
 	public static Table getColumnByOneTable(String tableName) {
 		Table tb = null;
 		try {
-			String sql = "show columns from " + tableName;
+			String sql = "show full columns from " + tableName;
 			ResultSet rs = stat.executeQuery(sql);
             int length=0;
 			tb = getTableByTableName(tableName);
@@ -110,6 +110,7 @@ public class db {
 				column_field = rs.getString("field");
 				column_type = rs.getString("type");
 				String pk = rs.getString("key");
+				String comment = rs.getString("Comment");
 				length = getLength(length, column_type);
 
 					column_field = new String(
@@ -121,6 +122,7 @@ public class db {
 					p.setName(column_field);
 					p.setColumn(getCloumnName(column_field));
 					p.setLength(length);
+					p.setComment(comment);
 					list.add(p);
 			}
 			tb.setPropertyList(list);

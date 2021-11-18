@@ -10,7 +10,7 @@ public class Application {
 		//初始化连接
 		db.init();
 		//生成单个表
-		generateThing.generateOneModle("bc_knowledge", "C:\\APP\\npSpace\\codeGenerater\\outputDIR");
+		generateThing.generateOneModle("bc_notify_remind", "C:\\APP\\npSpace\\codeGenerater\\outputDIR");
 	
 		//生成多个表
 	}

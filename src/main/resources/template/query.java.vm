@@ -14,7 +14,7 @@ import ${suffix}.${domain}.query.condition.${modelName}QueryCondition;
  */
  
 public interface ${Bean}Query {
-	public String getSql(${Bean}QueryCondition ${Bean.toLowerCase()}QueryCondition);
+	String getSql(${Bean}QueryCondition ${Bean.toLowerCase()}QueryCondition);
 	
-	public String getMixSql(${Bean}QueryCondition condition);
+	String getMixSql(${Bean}QueryCondition condition);
 }
